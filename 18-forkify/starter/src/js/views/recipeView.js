@@ -14,7 +14,6 @@ class RecipeView {
     const markup = this.#generateMarkup();
     this.#clear;
     this.#parentElement.insertAdjacentHTML('afterbegin', markup);
-    console.log(Fraction);
   }
 
   #clear() {
