@@ -4,6 +4,11 @@ import 'regenerator-runtime/runtime';
 import * as model from './model'
 import recipeView from './views/recipeView';
 import searchView from './views/searchView';
+import resultsView from './views/resultsView';
+
+if(module.hot) {
+  module.hot.accept(); 
+}
 
 const controlRecipes = async function () {
   try {
@@ -32,6 +37,8 @@ const controlRecipes = async function () {
   const controlSearchResults = async function(){
 
     try {
+      resultsView.renderSpinner();
+      console.log(resultsView)
       // 1) get search query 
       const query = searchView.getQuery();
       if(!query) return; 
@@ -40,7 +47,7 @@ const controlRecipes = async function () {
       await model.loadSearchResults(query);
 
       // 3) Render resutls 
-      // console.log(model.state.search.results);
+      resultsView.render(model.state.search.results);
       
     } catch(err){
       console.log(err);
