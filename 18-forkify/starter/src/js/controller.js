@@ -14,9 +14,12 @@ import paginationView from './views/paginationView';
 const controlRecipes = async function () {
   try {
     const id = window.location.hash.slice(1);
-
+    
     if(!id) return ;
     recipeView.renderSpinner();
+    // 0) Update results view to makr selected search result
+    resultsView.update(model.getSearchResultsPage())
+
 
     // 1) loading recipe
     await model.loadRecipe(id);
@@ -70,7 +73,8 @@ const controlRecipes = async function () {
     model.updateServings(newServings);
 
     // Update the recipe view 
-    recipeView.render(model.state.recipe);
+    // recipeView.render(model.state.recipe);
+    recipeView.update(model.state.recipe);
   }
 // showRecipe();
 const init = function() {
